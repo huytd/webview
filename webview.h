@@ -172,6 +172,7 @@ WEBVIEW_API void webview_terminate(struct webview *w);
 WEBVIEW_API void webview_exit(struct webview *w);
 WEBVIEW_API void webview_debug(const char *format, ...);
 WEBVIEW_API void webview_print_log(const char *s);
+WEBVIEW_API void webview_set_background_color(struct webview *w, float r, float g, float b, float a);
 
 #ifdef WEBVIEW_IMPLEMENTATION
 #undef WEBVIEW_IMPLEMENTATION
@@ -1676,16 +1677,13 @@ WEBVIEW_API int webview_init(struct webview *w) {
   if (w->resizable) {
     style = style | NSWindowStyleMaskResizable;
   }
-  if (w->titlebar_transparent) {
-    style = style | NSWindowStyleMaskFullSizeContentView;
-  }
+
   w->priv.window = [[NSWindow alloc] initWithContentRect:r
                                                styleMask:style
                                                  backing:NSBackingStoreBuffered
                                                    defer:NO];
   if (w->titlebar_transparent) {
     w->priv.window.titlebarAppearsTransparent = true;
-    w->priv.window.movableByWindowBackground = true;
   }
   [w->priv.window autorelease];
   [w->priv.window setTitle:nsTitle];
@@ -1886,6 +1884,11 @@ WEBVIEW_API void webview_terminate(struct webview *w) {
 }
 WEBVIEW_API void webview_exit(struct webview *w) { [NSApp terminate:NSApp]; }
 WEBVIEW_API void webview_print_log(const char *s) { NSLog(@"%s", s); }
+
+WEBVIEW_API void webview_set_background_color(struct webview *w, float r, float g, float b, float a) {
+  NSColor *rgb = [NSColor colorWithDeviceRed:r green:g blue:b alpha:a];
+  [w->priv.window setBackgroundColor:rgb];
+}
 
 #endif /* WEBVIEW_COCOA */
 
