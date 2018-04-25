@@ -1685,6 +1685,7 @@ WEBVIEW_API int webview_init(struct webview *w) {
                                                    defer:NO];
   if (w->titlebar_transparent) {
     w->priv.window.titlebarAppearsTransparent = true;
+    w->priv.window.movableByWindowBackground = true;
   }
   [w->priv.window autorelease];
   [w->priv.window setTitle:nsTitle];
