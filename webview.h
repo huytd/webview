@@ -1671,7 +1671,7 @@ WEBVIEW_API int webview_init(struct webview *w) {
   NSString *nsTitle = [NSString stringWithUTF8String:w->title];
   NSRect r = NSMakeRect(0, 0, w->width, w->height);
   NSUInteger style = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable |
-                     NSWindowStyleMaskMiniaturizable;
+                     NSWindowStyleMaskMiniaturizable | NSWindowStyleMaskFullSizeContentView;
   if (w->resizable) {
     style = style | NSWindowStyleMaskResizable;
   }
@@ -1679,6 +1679,7 @@ WEBVIEW_API int webview_init(struct webview *w) {
                                                styleMask:style
                                                  backing:NSBackingStoreBuffered
                                                    defer:NO];
+  w->priv.window.titlebarAppearsTransparent = true;
   [w->priv.window autorelease];
   [w->priv.window setTitle:nsTitle];
   [w->priv.window setDelegate:w->priv.windowDelegate];
