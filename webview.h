@@ -486,6 +486,8 @@ WEBVIEW_API void webview_print_log(const char *s) {
   fprintf(stderr, "%s\n", s);
 }
 
+WEBVIEW_API void webview_set_background_color(struct webview *w, float r, float g, float b, float a) { }
+
 #endif /* WEBVIEW_GTK */
 
 #if defined(WEBVIEW_WINAPI)
@@ -1415,6 +1417,8 @@ WEBVIEW_API void webview_set_color(struct webview *w, uint8_t r, uint8_t g,
   HBRUSH brush = CreateSolidBrush(RGB(r, g, b));
   SetClassLongPtr(w->priv.hwnd, GCLP_HBRBACKGROUND, (LONG_PTR)brush);  
 }
+
+WEBVIEW_API void webview_set_background_color(struct webview *w, float r, float g, float b, float a) { }
 
 /* These are missing parts from MinGW */
 #ifndef __IFileDialog_INTERFACE_DEFINED__
