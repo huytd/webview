@@ -1418,8 +1418,6 @@ WEBVIEW_API void webview_set_color(struct webview *w, uint8_t r, uint8_t g,
   SetClassLongPtr(w->priv.hwnd, GCLP_HBRBACKGROUND, (LONG_PTR)brush);  
 }
 
-WEBVIEW_API void webview_set_background_color(struct webview *w, float r, float g, float b, float a) { }
-
 /* These are missing parts from MinGW */
 #ifndef __IFileDialog_INTERFACE_DEFINED__
 #define __IFileDialog_INTERFACE_DEFINED__
@@ -1594,6 +1592,7 @@ WEBVIEW_API void webview_dialog(struct webview *w,
 WEBVIEW_API void webview_terminate(struct webview *w) { PostQuitMessage(0); }
 WEBVIEW_API void webview_exit(struct webview *w) { OleUninitialize(); }
 WEBVIEW_API void webview_print_log(const char *s) { OutputDebugString(s); }
+WEBVIEW_API void webview_set_background_color(struct webview *w, float r, float g, float b, float a) { }
 
 #endif /* WEBVIEW_WINAPI */
 
